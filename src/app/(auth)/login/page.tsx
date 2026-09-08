@@ -15,7 +15,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { MessageSquare, UsersRound } from "lucide-react";
+import {
+  ArrowUpRight,
+  Building2,
+  Check,
+  MessageCircle,
+  UsersRound,
+} from "lucide-react";
+import { BrandMark } from "@/components/brand-mark";
 
 // `useSearchParams` opts the component out of static prerendering
 // unless it sits under a Suspense boundary. We split the form into
@@ -75,27 +82,53 @@ function LoginPageInner() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <Card className="w-full max-w-md border-border bg-card">
-        <CardHeader className="items-center text-center">
-          <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-            {inviteToken ? (
-              <UsersRound className="h-6 w-6 text-primary" />
-            ) : (
-              <MessageSquare className="h-6 w-6 text-primary" />
-            )}
+    <div className="min-h-screen bg-background p-4 sm:p-6 lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(420px,0.95fr)] lg:gap-6 lg:p-6">
+      <section className="relative hidden overflow-hidden rounded-xl border border-border bg-card px-8 py-8 text-foreground lg:flex lg:flex-col xl:px-12">
+        <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border border-border/70" />
+        <div className="absolute -bottom-32 -left-20 h-80 w-80 rounded-full border border-border/70" />
+        <div className="relative z-10 flex items-center gap-3">
+          <BrandMark className="h-10 w-10 text-primary" />
+          <span className="text-lg font-semibold tracking-tight">Bharoxa</span>
+        </div>
+        <div className="relative z-10 my-auto max-w-xl py-16">
+          <p className="mb-5 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.18em] text-primary">
+            <span className="h-px w-8 bg-primary" /> {t('eyebrow')}
+          </p>
+          <h1 className="max-w-lg text-4xl font-semibold leading-[1.08] tracking-tight xl:text-5xl">{t('heroTitle')}</h1>
+          <p className="mt-6 max-w-md text-base leading-7 text-muted-foreground">{t('heroDescription')}</p>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            {[
+              { icon: MessageCircle, text: t('featureInbox') },
+              { icon: Building2, text: t('featureProperties') },
+              { icon: UsersRound, text: t('featureTeam') },
+              { icon: Check, text: t('featureFollowups') },
+            ].map(({ icon: Icon, text }) => (
+              <div key={text} className="flex items-center gap-3 text-sm text-foreground">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-muted text-primary"><Icon className="h-4 w-4" /></span>
+                {text}
+              </div>
+            ))}
           </div>
-          <CardTitle className="text-xl text-foreground">
-            {inviteToken ? t('titleAccept') : t('titleWelcome')}
-          </CardTitle>
-          <CardDescription className="text-muted-foreground">
-            {inviteToken
-              ? t('descAccept')
-              : t('descWelcome')}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleLogin} className="flex flex-col gap-4">
+        </div>
+        <div className="relative z-10 flex items-center justify-between border-t border-border pt-5 text-xs text-muted-foreground">
+          <span>{t('footer')}</span>
+          <ArrowUpRight className="h-4 w-4" />
+        </div>
+      </section>
+
+      <section className="flex min-h-[calc(100vh-2rem)] items-center justify-center px-1 py-4 sm:px-2 lg:min-h-0 lg:py-0">
+        <Card className="w-full max-w-md rounded-xl border-border bg-card">
+          <CardHeader className="items-start px-6 pb-5 pt-7 sm:px-8 sm:pt-8">
+            <div className="mb-7 flex items-center gap-3 lg:hidden">
+              <BrandMark className="h-10 w-10 text-primary" />
+              <span className="text-xl font-bold tracking-tight text-foreground">Bharoxa</span>
+            </div>
+            {inviteToken ? <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10"><UsersRound className="h-5 w-5 text-primary" /></div> : null}
+            <CardTitle className="text-2xl tracking-tight text-foreground">{inviteToken ? t('titleAccept') : t('titleWelcome')}</CardTitle>
+            <CardDescription className="mt-2 text-sm leading-6 text-muted-foreground">{inviteToken ? t('descAccept') : t('descWelcome')}</CardDescription>
+          </CardHeader>
+          <CardContent className="px-6 pb-7 sm:px-8 sm:pb-8">
+            <form onSubmit={handleLogin} className="flex flex-col gap-4">
             {error && (
               <div className="rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
                 {error}
@@ -149,7 +182,7 @@ function LoginPageInner() {
             </Button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-muted-foreground">
+            <p className="mt-6 text-center text-sm text-muted-foreground">
             {t('noAccount')}{" "}
             <Link
               href={
@@ -161,9 +194,10 @@ function LoginPageInner() {
             >
               {t('createAccount')}
             </Link>
-          </p>
-        </CardContent>
-      </Card>
+            </p>
+          </CardContent>
+        </Card>
+      </section>
     </div>
   );
 }

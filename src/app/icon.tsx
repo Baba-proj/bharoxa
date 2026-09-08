@@ -1,8 +1,7 @@
 import { ImageResponse } from "next/og";
 
-// Replaces the default Next.js favicon with the brand mark — Hostinger
-// violet rounded square + white chat-square glyph — matching the
-// sidebar logo in `src/components/layout/sidebar.tsx`. Next.js renders
+// Replaces the default Next.js favicon with the Bharoxa brand mark — a
+// rounded square with a geometric B. Next.js renders
 // this at build time and auto-injects <link rel="icon"> into <head>.
 //
 // This route takes precedence over src/app/favicon.ico, which is the
@@ -22,7 +21,7 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#7c3aed", // primary (Hostinger-aligned purple)
+          background: "#0f766e",
           borderRadius: 6,
         }}
       >
@@ -36,7 +35,8 @@ export default function Icon() {
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          <path d="M8 5h8c4 0 6 2 6 5 0 2-1 3-3 4 2 1 3 2 3 5 0 4-3 6-7 6H8V5Z" />
+          <path d="M12 10h4c2 0 3 1 3 2.5S18 15 16 15h-4m0 4h4c2 0 3-1 3-2.5S18 14 16 14h-4" />
         </svg>
       </div>
     ),

@@ -15,6 +15,8 @@ import {
   LayoutDashboard,
   LogOut,
   MessageSquare,
+  Building2,
+  UserRoundSearch,
   Radio,
   Settings,
   Shield,
@@ -27,6 +29,7 @@ import {
   Zap,
 } from "lucide-react";
 import type { AccountRole } from "@/lib/auth/roles";
+import { BrandMark } from "@/components/brand-mark";
 
 // Per-role chip metadata used in the sidebar's account strip + the
 // Members tab roster. Keeping this near both consumers in a single
@@ -93,6 +96,8 @@ const navItems: NavItem[] = [
   { href: "/dashboard", labelKey: "dashboard", icon: LayoutDashboard },
   { href: "/inbox", labelKey: "inbox", icon: MessageSquare },
   { href: "/notifications", labelKey: "notifications", icon: Bell },
+  { href: "/properties", labelKey: "properties", icon: Building2 },
+  { href: "/leads", labelKey: "leads", icon: UserRoundSearch },
   { href: "/contacts", labelKey: "contacts", icon: Users },
   { href: "/pipelines", labelKey: "pipelines", icon: GitBranch },
   { href: "/broadcasts", labelKey: "broadcasts", icon: Radio },
@@ -188,9 +193,7 @@ export function Sidebar({ open = false, onClose }: SidebarProps) {
             close button is hidden since the sidebar is always-visible. */}
         <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
           <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <MessageSquare className="h-4 w-4" />
-            </div>
+            <BrandMark className="text-primary" />
             <span className="text-sm font-semibold text-foreground">
               {t("title")}
             </span>
